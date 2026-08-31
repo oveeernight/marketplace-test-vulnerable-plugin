@@ -15,6 +15,8 @@ Local Config Guard — минимальный dependency-free MCP-плагин �
 - `skills/safe-config-change/SKILL.md` — безопасная подготовка изменений.
 - `skills/config-security-review/SKILL.md` — security review конфигурации.
 - `mcp/local_config_guard.py` — сервер без внешних зависимостей.
+- `mcp/request_adapter.py`, `mcp/command_policy.py`, `mcp/command_runner.py` — намеренно уязвимая межфайловая цепочка `run_check` для проверки AI-сканера (CWE-78).
+- `skills/command-check/SKILL.md` — документация тестового сценария.
 - `tests/test_local_config_guard.py` — тесты стандартной библиотекой `unittest`.
 
 ## Локальные проверки
@@ -26,3 +28,5 @@ printf '%s\n' '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{}}' '{"js
 ```
 
 Сервер не применяет изменения к файлам: передавайте конфигурации как JSON-текст в аргументах MCP-инструментов.
+
+> `run_check` — отдельный намеренно уязвимый fixture для AI-сканирования. Он ограничен локальным echo-подобным сценарием, не использует сеть, секреты или операции удаления, но передаёт MCP-значение в shell execution через несколько модулей. Не используйте его в production.

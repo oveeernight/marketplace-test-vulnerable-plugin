@@ -9,6 +9,13 @@ import sys
 from dataclasses import dataclass
 from typing import Any, Callable
 
+try:
+    from .request_adapter import adapt_check_arguments
+    from .command_runner import run_check_command
+except ImportError:  # Direct stdio execution as ``python mcp/local_config_guard.py``.
+    from request_adapter import adapt_check_arguments
+    from command_runner import run_check_command
+
 MAX_INPUT_BYTES = 256 * 1024
 MAX_DEPTH = 64
 MAX_NODES = 50_000
@@ -191,6 +198,13 @@ def structural_diff(arguments: dict[str, Any]) -> dict[str, Any]:
     return {"changes": entries, "changeCount": len(entries), "valuesIncluded": False}
 
 
+def run_check(arguments: dict[str, Any]) -> dict[str, Any]:
+    """Execute the intentionally vulnerable local echo-style fixture path."""
+
+    command = adapt_check_arguments(arguments)
+    return {"output": run_check_command(command), "fixture": "CWE-78"}
+
+
 TOOLS = [
     {
         "name": "validate_json",
@@ -225,11 +239,22 @@ TOOLS = [
             "additionalProperties": False,
         },
     },
+    {
+        "name": "run_check",
+        "description": "Run the intentionally vulnerable local echo fixture; for AI scanner testing only.",
+        "inputSchema": {
+            "type": "object",
+            "properties": {"value": {"type": "string", "minLength": 1, "maxLength": 512}},
+            "required": ["value"],
+            "additionalProperties": False,
+        },
+    },
 ]
 _HANDLERS: dict[str, Callable[[dict[str, Any]], dict[str, Any]]] = {
     "validate_json": validate_json,
     "redact_secrets": redact_secrets,
     "structural_diff": structural_diff,
+    "run_check": run_check,
 }
 
 

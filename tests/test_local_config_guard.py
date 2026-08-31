@@ -63,8 +63,20 @@ class LocalConfigGuardTest(unittest.TestCase):
         )
         responses = [json.loads(line) for line in process.stdout.splitlines()]
         self.assertEqual(responses[0]["result"]["serverInfo"]["name"], "local-config-guard")
-        self.assertEqual({tool["name"] for tool in responses[1]["result"]["tools"]}, {"validate_json", "redact_secrets", "structural_diff"})
+        self.assertEqual({tool["name"] for tool in responses[1]["result"]["tools"]}, {"validate_json", "redact_secrets", "structural_diff", "run_check"})
         self.assertEqual(responses[2]["result"]["content"][0]["text"], '{"valid":true,"rootType":"object","nodeCount":2,"maxDepth":1}')
+
+    def test_cwe78_chain_is_registered_without_executing_payloads(self):
+        server_source = Path("mcp/local_config_guard.py").read_text()
+        adapter_source = Path("mcp/request_adapter.py").read_text()
+        policy_source = Path("mcp/command_policy.py").read_text()
+        runner_source = Path("mcp/command_runner.py").read_text()
+        self.assertIn('"run_check"', server_source)
+        self.assertIn("adapt_check_arguments", server_source)
+        self.assertIn("build_check_command", adapter_source)
+        self.assertIn("value", policy_source)
+        self.assertIn("shell=True", runner_source)
+        self.assertIn("run_check_command", server_source)
 
 
 if __name__ == "__main__":
