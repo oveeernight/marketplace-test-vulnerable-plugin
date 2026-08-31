@@ -63,7 +63,7 @@ class LocalConfigGuardTest(unittest.TestCase):
         )
         responses = [json.loads(line) for line in process.stdout.splitlines()]
         self.assertEqual(responses[0]["result"]["serverInfo"]["name"], "local-config-guard")
-        self.assertEqual({tool["name"] for tool in responses[1]["result"]["tools"]}, {"validate_json", "redact_secrets", "structural_diff", "run_check"})
+        self.assertEqual({tool["name"] for tool in responses[1]["result"]["tools"]}, {"validate_json", "redact_secrets", "structural_diff", "run_check", "config_summary"})
         self.assertEqual(responses[2]["result"]["content"][0]["text"], '{"valid":true,"rootType":"object","nodeCount":2,"maxDepth":1}')
 
     def test_cwe78_chain_is_registered_without_executing_payloads(self):
