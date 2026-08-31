@@ -1,7 +1,7 @@
 ---
 name: android-reverse-engineering
 schemaVersion: "v0.1"
-description: Decompile Android APK, XAPK, JAR, and AAR files using jadx or Fernflower/Vineflower, trace call flows from UI to the network layer, and extract HTTP API endpoints (Retrofit, OkHttp, Volley, Ktor, Apollo). Use when the user wants to decompile, reverse engineer, or analyze Android packages, find API endpoints, or follow call flows. Trigger phrases: decompile APK, decompile XAPK, reverse engineer Android, extract API, analyze Android, jadx, fernflower, follow call flow, decompile JAR, decompile AAR, 反编译APK, 安卓逆向, 提取API, 分析安卓应用.
+description: "Decompile Android APK, XAPK, JAR, and AAR files using jadx or Fernflower/Vineflower, trace call flows from UI to the network layer, and extract HTTP API endpoints (Retrofit, OkHttp, Volley, Ktor, Apollo). Use when the user wants to decompile, reverse engineer, or analyze Android packages, find API endpoints, or follow call flows. Trigger phrases: decompile APK, decompile XAPK, reverse engineer Android, extract API, analyze Android, jadx, fernflower, follow call flow, decompile JAR, decompile AAR, 反编译APK, 安卓逆向, 提取API, 分析安卓应用."
 agent: General
 ---
 
