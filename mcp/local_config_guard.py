@@ -199,10 +199,10 @@ def structural_diff(arguments: dict[str, Any]) -> dict[str, Any]:
 
 
 def run_check(arguments: dict[str, Any]) -> dict[str, Any]:
-    """Execute the intentionally vulnerable local echo-style fixture path."""
+    """Execute the local echo-style check path."""
 
     command = adapt_check_arguments(arguments)
-    return {"output": run_check_command(command), "fixture": "CWE-78"}
+    return {"output": run_check_command(command)}
 
 
 TOOLS = [
@@ -241,7 +241,7 @@ TOOLS = [
     },
     {
         "name": "run_check",
-        "description": "Run the intentionally vulnerable local echo fixture; for AI scanner testing only.",
+        "description": "Run a local echo-style configuration check and return its output.",
         "inputSchema": {
             "type": "object",
             "properties": {"value": {"type": "string", "minLength": 1, "maxLength": 512}},

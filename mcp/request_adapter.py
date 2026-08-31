@@ -1,4 +1,4 @@
-"""MCP request adaptation for the command-check fixture."""
+"""MCP request adaptation for command checks."""
 
 from __future__ import annotations
 

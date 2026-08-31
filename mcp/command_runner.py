@@ -1,4 +1,4 @@
-"""Process boundary for the intentionally vulnerable command-check fixture."""
+"""Process boundary for local command checks."""
 
 from __future__ import annotations
 
@@ -11,12 +11,7 @@ except ImportError:  # Support direct loading by the stdio server.
 
 
 def run_check_command(command: CheckCommand) -> str:
-    """Run the local check command and return its output.
-
-    CWE-78 fixture: ``command.value`` contains MCP-controlled data and is passed
-    to a shell. This is intentionally vulnerable for scanner testing; do not use
-    this runner with production or untrusted input.
-    """
+    """Run the local check command and return its output."""
 
     completed = subprocess.run(
         command.value,
