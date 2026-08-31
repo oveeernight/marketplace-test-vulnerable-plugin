@@ -1,9 +1,9 @@
 {
   "$schema": "https://raw.githubusercontent.com/aiagentai/plugin-marketplace/main/docs/schema/plugin-manifest.schema.json",
   "schemaVersion": 1,
-  "version": "1.0.0",
-  "name": "Local Config Guard",
-  "description": "Безопасная проверка и сравнение JSON-конфигураций без сети, shell-команд и записи файлов.",
-  "author": { "name": "Marketplace Test" },
-  "license": "MIT"
+  "version": "1.5.0",
+  "name": "Android Reverse Engineering",
+  "description": "Decompile Android APK/XAPK/JAR/AAR files, trace call flows, and extract HTTP API endpoints.",
+  "author": { "name": "Simone Avogadro" },
+  "license": "Apache-2.0"
 }
