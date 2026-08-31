@@ -1,20 +1,28 @@
-# Vulnerable Command Demo
+# Local Config Guard
 
-Этот репозиторий — учебный тестовый репозиторий для проверки AI-сканирования плагина. Код намеренно содержит очевидную уязвимость **command injection**.
+Local Config Guard — минимальный dependency-free MCP-плагин для безопасной работы с JSON-конфигурациями. Сервер работает только со stdin/stdout: он не использует сеть, shell-команды, файловую запись или переменные окружения.
 
-Запускать demo не требуется. Скрипт не должен использоваться с реальным или недоверенным вводом: он намеренно передаёт введённую строку оболочке и может выполнить команды.
+## Возможности
 
-## Структура
+- `validate_json` — проверяет JSON, лимит 256 KiB, глубину 64, 50 000 узлов, размер строк и дублирующиеся ключи.
+- `redact_secrets` — рекурсивно заменяет значения чувствительных полей и распознанные credential-подобные строки на `[REDACTED]`.
+- `structural_diff` — сначала редактирует оба документа, затем возвращает только JSON Pointer-пути и виды изменений; значения не включаются.
 
-- `plugin.json` — манифест плагина.
-- `skills/unsafe-command-demo/SKILL.md` — описание демонстрационного навыка.
-- `skills/unsafe-command-demo/demo.py` — самостоятельный учебный пример с уязвимостью.
-- `LICENSE` — лицензия MIT.
+## Компоненты
 
-Команда запуска приведена только для справки и не рекомендуется к выполнению:
+- `mcp_servers.json` — stdio-конфигурация MCP.
+- `rules/local-config-guard.md` — единое правило безопасного порядка действий.
+- `skills/safe-config-change/SKILL.md` — безопасная подготовка изменений.
+- `skills/config-security-review/SKILL.md` — security review конфигурации.
+- `mcp/local_config_guard.py` — сервер без внешних зависимостей.
+- `tests/test_local_config_guard.py` — тесты стандартной библиотекой `unittest`.
+
+## Локальные проверки
 
 ```text
-python3 skills/unsafe-command-demo/demo.py
+python3 -m py_compile mcp/local_config_guard.py
+python3 -m unittest discover -s tests -v
+printf '%s\n' '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{}}' '{"jsonrpc":"2.0","id":2,"method":"tools/list","params":{}}' | python3 mcp/local_config_guard.py
 ```
 
-Не передавайте этой команде реальный или недоверенный ввод.
+Сервер не применяет изменения к файлам: передавайте конфигурации как JSON-текст в аргументах MCP-инструментов.

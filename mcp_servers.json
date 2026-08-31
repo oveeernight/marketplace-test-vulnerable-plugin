@@ -1,0 +1,12 @@
+{
+  "$schema": "https://raw.githubusercontent.com/aiagentai/plugin-marketplace/main/docs/schema/mcp-servers.schema.json",
+  "local-config-guard": {
+    "runModes": [
+      {
+        "type": "stdio",
+        "command": "python3",
+        "args": ["mcp/local_config_guard.py"]
+      }
+    ]
+  }
+}

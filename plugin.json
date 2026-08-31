@@ -1,9 +1,9 @@
 {
-  "$schema": "https://raw.githubusercontent.com/explyt/plugin-marketplace/main/docs/schema/plugin-manifest.schema.json",
+  "$schema": "https://raw.githubusercontent.com/aiagentai/plugin-marketplace/main/docs/schema/plugin-manifest.schema.json",
   "schemaVersion": 1,
-  "version": "0.1.0",
-  "name": "Vulnerable Command Demo",
-  "description": "Учебный плагин с намеренно уязвимым примером для проверки AI-сканирования.",
+  "version": "1.0.0",
+  "name": "Local Config Guard",
+  "description": "Безопасная проверка и сравнение JSON-конфигураций без сети, shell-команд и записи файлов.",
   "author": { "name": "Marketplace Test" },
   "license": "MIT"
 }
