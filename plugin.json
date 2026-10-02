@@ -1,9 +1,8 @@
 {
-  "$schema": "https://raw.githubusercontent.com/aiagentai/plugin-marketplace/main/docs/schema/plugin-manifest.schema.json",
   "schemaVersion": 1,
-  "version": "1.5.0",
-  "name": "Android Reverse Engineering",
-  "description": "Decompile Android APK/XAPK/JAR/AAR files, trace call flows, and extract HTTP API endpoints.",
-  "author": { "name": "Simone Avogadro" },
-  "license": "Apache-2.0"
+  "version": "1.0.0",
+  "name": "Kotlin + Spring Backend Skills",
+  "description": "25 skills for Kotlin + Spring Boot backend development: Gradle, DI, JPA, Jackson, transactions, security, testing, observability, upgrades and incident triage.",
+  "license": "MIT",
+  "homepage": "https://github.com/yalishevant/kotlin-backend-agent-skills"
 }
